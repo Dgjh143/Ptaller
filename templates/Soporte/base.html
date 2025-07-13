@@ -1,0 +1,42 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Sistema de Soporte{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/estilo.css' %}">
+    <img src="{% static 'img/logo.jpg' %}" alt="Logo Consejo" class="logo">
+
+</head>
+
+<body>
+
+    <div class="contenedor">
+        <header>
+            {% block header %}
+            <h1>Sistema de Soporte Técnico</h1>
+            <h2>Consejo de la Magistratura - Unidad de Informática</h2>
+            {% endblock %}
+        </header>
+
+        {% block content %}
+        <!-- Aquí va el contenido específico de cada página -->
+        {% endblock %}
+
+        <footer class="navegacion">
+            <div class="botones-derecha">
+               
+            </div>
+        </footer>
+
+        <div class="pie">
+            <p>© 2025 Consejo de la Magistratura - Todos los derechos reservados</p>
+        </div>
+    </div>
+
+    {% block scripts %}
+    <!-- Aquí puedes insertar scripts personalizados -->
+    {% endblock %}
+
+</body>
+</html>

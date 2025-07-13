@@ -1,71 +1,57 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Inicio - Funcionario</title>
-    <link rel="stylesheet" href="/static/css/estilo.css">
-</head>
-<body>
+{% extends 'Soporte/base.html' %}
 
-    <div class="contenedor">
-        <header>
-            <h1>Bienvenido, Juan Pérez</h1>
-            <h2>Consejo de la Magistratura - Unidad de Informática</h2>
-        </header>
+{% block title %}Inicio - Funcionario{% endblock %}
 
-        <section class="tabla-solicitudes">
-            <h3>Mis Solicitudes</h3>
-            <table>
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Fecha</th>
-                        <th>Tipo</th>
-                        <th>Descripción</th>
-                        <th>Estado</th>
-                        <th>Ingeniero Asignado</th>
-                        <th>Urgencia</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- Ejemplo de solicitudes -->
-                    <tr>
-                        <td>1</td>
-                        <td>2025-07-13</td>
-                        <td>Técnico</td>
-                        <td>Problema con la impresora</td>
-                        <td>En progreso</td>
-                        <td>Ing. Ramírez</td>
-                        <td><span class="urgencia-alta">Alta</span></td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>2025-07-10</td>
-                        <td>Sistema</td>
-                        <td>Error en SIREJ</td>
-                        <td>Finalizado</td>
-                        <td>Ing. López</td>
-                        <td><span class="urgencia-media">Media</span></td>
-                    </tr>
-                </tbody>
-            </table>
-        </section>
+{% block header %}
+<h1>Bienvenido, {{ usuario.nombre }}</h1>
+<h2>Consejo de la Magistratura - Unidad de Informática</h2>
+{% endblock %}
 
-        <footer class="navegacion">
-            <div class="botones-izquierda">
-                <a href="/funcionario/">Inicio</a>
-                <a href="/soporte-tecnico/">Soporte Técnico</a>
-                <a href="/soporte-sistema/">Soporte Sistema</a>
-            </div>
-            <div class="botones-derecha">
-                <a href="/login">Cerrar Sesión</a>
-            </div>
-        </footer>
+{% block content %}
+<section class="tabla-solicitudes">
+    <h3>Mis Solicitudes</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Fecha</th>
+                <th>Tipo</th>
+                <th>Descripción</th>
+                <th>Estado</th>
+                <th>Ingeniero Asignado</th>
+                <th>Urgencia</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for solicitud in solicitudes %}
+            <tr>
+                <td>{{ solicitud.id }}</td>
+                <td>{{ solicitud.fecha }}</td>
+                <td>{{ solicitud.tipo }}</td>
+                <td>{{ solicitud.descripcion }}</td>
+                <td>{{ solicitud.estado }}</td>
+                <td>{{ solicitud.ingeniero }}</td>
+                <td>
+                    <span class="urgencia-{{ solicitud.urgencia|lower }}">
+                        {{ solicitud.urgencia }}
+                    </span>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</section>
+{% endblock %}
 
-        <div class="pie">
-            <p>© 2025 Consejo de la Magistratura - Todos los derechos reservados</p>
-        </div>
+{% block scripts %}
+<footer class="navegacion">
+    <div class="botones-izquierda">
+        <a href="{% url 'funcionario_inicio' %}">Inicio</a>
+        <a href="{% url 'soporte_tecnico' %}">Soporte Técnico</a>
+        <a href="{% url 'soporte_sistema' %}">Soporte Sistema</a>
     </div>
-
-</body>
-</html>
+    <div class="botones-derecha">
+        <a href="{% url 'login' %}">Cerrar Sesión</a>
+    </div>
+</footer>
+{% endblock %}

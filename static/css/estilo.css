@@ -1,0 +1,198 @@
+/* Importar fuentes desde Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Lato:wght@400;700&display=swap');
+
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Lato', sans-serif;
+    background-color: #f0f7f4;
+    color: #333;
+}
+
+/* Contenedor general */
+.contenedor {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 30px;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    border-radius: 8px;
+}
+
+/* Títulos principales */
+header h1 {
+    font-family: 'Great Vibes', cursive;
+    font-size: 2.5em;
+    color: #2e8b57;
+    text-align: center;
+    margin-bottom: 5px;
+}
+
+header h2 {
+    font-size: 1.2em;
+    text-align: center;
+    color: #555;
+}
+
+/* Pie de página */
+.pie {
+    text-align: center;
+    font-size: 0.9em;
+    margin-top: 30px;
+    color: #777;
+}
+
+/* Botones */
+button, .btn-asignar, .btn-ver, .btn-cancelar, .botones-derecha a, .botones-izquierda a {
+    background-color: #2e8b57;
+    color: white;
+    padding: 8px 16px;
+    margin: 5px;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+button:hover, .btn-asignar:hover, .btn-ver:hover, .btn-cancelar:hover, .botones-derecha a:hover, .botones-izquierda a:hover {
+    background-color: #256b45;
+}
+
+/* Tablas */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+table th, table td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+}
+
+thead {
+    background-color: #b2d8c9;
+}
+
+/* Urgencias */
+.urgencia-alta {
+    background-color: #e74c3c;
+    color: white;
+    padding: 3px 8px;
+    border-radius: 3px;
+}
+
+.urgencia-media {
+    background-color: #f39c12;
+    color: white;
+    padding: 3px 8px;
+    border-radius: 3px;
+}
+
+.urgencia-baja {
+    background-color: #27ae60;
+    color: white;
+    padding: 3px 8px;
+    border-radius: 3px;
+}
+
+/* Formularios */
+form label {
+    display: block;
+    margin-top: 15px;
+    font-weight: bold;
+}
+
+form input[type="text"],
+form input[type="password"],
+form input[type="file"],
+form select,
+form textarea {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* Login */
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 95vh;
+    background-color: #e9f5f1;
+}
+
+.login-box {
+    background-color: white;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    text-align: center;
+    width: 350px;
+}
+
+.login-box img.logo {
+    width: 100px;
+    margin-bottom: 15px;
+}
+
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-contenido {
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    width: 400px;
+    max-width: 90%;
+}
+
+/* Navegación inferior */
+footer.navegacion {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+}
+
+.botones-izquierda, .botones-derecha {
+    display: flex;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .contenedor {
+        padding: 20px;
+    }
+
+    header h1 {
+        font-size: 2em;
+    }
+
+    .login-box {
+        width: 90%;
+    }
+
+    .botones-izquierda, .botones-derecha {
+        flex-direction: column;
+        gap: 10px;
+    }
+}

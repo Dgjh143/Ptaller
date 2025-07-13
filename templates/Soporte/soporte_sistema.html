@@ -1,84 +1,76 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Solicitud de Soporte de Sistema</title>
-    <link rel="stylesheet" href="/static/css/estilo.css">
-    <script>
-        function actualizarFechaHora() {
-            const ahora = new Date();
-            const fecha = ahora.toISOString().slice(0, 10);
-            const hora = ahora.toTimeString().slice(0, 5);
-            document.getElementById('fecha').value = fecha;
-            document.getElementById('hora').value = hora;
-        }
+{% extends 'Soporte/base.html' %}
 
-        function mostrarOtro() {
-            const select = document.getElementById('sistema');
-            const otroDiv = document.getElementById('otro-sistema');
-            if (select.value === 'Otro') {
-                otroDiv.style.display = 'block';
-            } else {
-                otroDiv.style.display = 'none';
-            }
-        }
+{% block title %}Solicitud de Soporte de Sistema{% endblock %}
 
-        window.onload = actualizarFechaHora;
-    </script>
-</head>
-<body>
+{% block content %}
+<script>
+    function actualizarFechaHora() {
+        const ahora = new Date();
+        const fecha = ahora.toISOString().slice(0, 10);
+        const hora = ahora.toTimeString().slice(0, 5);
+        document.getElementById('fecha').value = fecha;
+        document.getElementById('hora').value = hora;
+    }
 
-    <div class="contenedor">
-        <header>
-            <h1>Nueva Solicitud de Soporte de Sistema</h1>
-            <h2>Consejo de la Magistratura - Unidad de Informática</h2>
-        </header>
+    function mostrarOtro() {
+        const select = document.getElementById('sistema');
+        const otroDiv = document.getElementById('otro-sistema');
+        otroDiv.style.display = (select.value === 'Otro') ? 'block' : 'none';
+    }
 
-        <form action="#" method="post" class="formulario">
-            <!-- Fecha y Hora automáticas -->
-            <label for="fecha">Fecha:</label>
-            <input type="text" id="fecha" name="fecha" readonly>
+    window.onload = actualizarFechaHora;
+</script>
 
-            <label for="hora">Hora:</label>
-            <input type="text" id="hora" name="hora" readonly>
+<div class="contenedor">
+    <header>
+        <h1>Nueva Solicitud de Soporte de Sistema</h1>
+        <h2>Consejo de la Magistratura - Unidad de Informática</h2>
+    </header>
 
-            <!-- Datos del solicitante (por ahora estáticos) -->
-            <label for="nombre">Nombre del Solicitante:</label>
-            <input type="text" id="nombre" name="nombre" value="María Pérez" readonly>
+    <form action="#" method="post" class="formulario">
+        {% csrf_token %}
+        <!-- Fecha y Hora automáticas -->
+        <label for="fecha">Fecha:</label>
+        <input type="text" id="fecha" name="fecha" readonly>
 
-            <label for="cargo">Cargo:</label>
-            <input type="text" id="cargo" name="cargo" value="Responsable de Registro" readonly>
+        <label for="hora">Hora:</label>
+        <input type="text" id="hora" name="hora" readonly>
 
-            <label for="ubicacion">Ubicación:</label>
-            <input type="text" id="ubicacion" name="ubicacion" value="Oficina Central - Trinidad" readonly>
+        <!-- Datos del solicitante (por ahora estáticos) -->
+        <label for="nombre">Nombre del Solicitante:</label>
+        <input type="text" id="nombre" name="nombre" value="María Pérez" readonly>
 
-            <!-- Tipo de sistema -->
-            <label for="sistema">¿Qué sistema presenta el error?</label>
-            <select name="sistema" id="sistema" onchange="mostrarOtro()" required>
-                <option value="">Seleccione uno</option>
-                <option value="SIREJ">SIREJ</option>
-                <option value="SINAREJ">SINAREJ</option>
-                <option value="SISCOPE">SISCOPE</option>
-                <option value="Otro">Otro</option>
-            </select>
+        <label for="cargo">Cargo:</label>
+        <input type="text" id="cargo" name="cargo" value="Responsable de Registro" readonly>
 
-            <!-- Especificar otro sistema -->
-            <div id="otro-sistema" style="display: none;">
-                <label for="otro">Especifique el sistema:</label>
-                <input type="text" id="otro" name="otro">
-            </div>
+        <label for="ubicacion">Ubicación:</label>
+        <input type="text" id="ubicacion" name="ubicacion" value="Oficina Central - Trinidad" readonly>
 
-            <!-- Botones -->
-            <div class="botones-formulario">
-                <button type="submit">Enviar Solicitud</button>
-                <a href="/funcionario/" class="btn-cancelar">Cancelar</a>
-            </div>
-        </form>
+        <!-- Tipo de sistema -->
+        <label for="sistema">¿Qué sistema presenta el error?</label>
+        <select name="sistema" id="sistema" onchange="mostrarOtro()" required>
+            <option value="">Seleccione uno</option>
+            <option value="SIREJ">SIREJ</option>
+            <option value="SINAREJ">SINAREJ</option>
+            <option value="SISCOPE">SISCOPE</option>
+            <option value="Otro">Otro</option>
+        </select>
 
-        <div class="pie">
-            <p>© 2025 Consejo de la Magistratura - Todos los derechos reservados</p>
+        <!-- Especificar otro sistema -->
+        <div id="otro-sistema" style="display: none;">
+            <label for="otro">Especifique el sistema:</label>
+            <input type="text" id="otro" name="otro">
         </div>
-    </div>
 
-</body>
-</html>
+        <!-- Botones -->
+        <div class="botones-formulario">
+            <button type="submit">Enviar Solicitud</button>
+            <a href="/funcionario/" class="btn-cancelar">Cancelar</a>
+        </div>
+    </form>
+
+    <div class="pie">
+        <p>© 2025 Consejo de la Magistratura - Todos los derechos reservados</p>
+    </div>
+</div>
+{% endblock %}

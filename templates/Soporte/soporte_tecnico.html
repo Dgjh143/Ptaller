@@ -1,62 +1,58 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Solicitud de Soporte Técnico</title>
-    <link rel="stylesheet" href="/static/css/estilo.css">
-    <script>
-        function actualizarFechaHora() {
-            const ahora = new Date();
-            const fecha = ahora.toISOString().slice(0, 10);
-            const hora = ahora.toTimeString().slice(0, 5);
-            document.getElementById('fecha').value = fecha;
-            document.getElementById('hora').value = hora;
-        }
+{% extends 'Soporte/base.html' %}
 
-        window.onload = actualizarFechaHora;
-    </script>
-</head>
-<body>
+{% block title %}Solicitud de Soporte Técnico{% endblock %}
 
-    <div class="contenedor">
-        <header>
-            <h1>Nueva Solicitud de Soporte Técnico</h1>
-            <h2>Consejo de la Magistratura - Unidad de Informática</h2>
-        </header>
+{% block content %}
+<script>
+    function actualizarFechaHora() {
+        const ahora = new Date();
+        const fecha = ahora.toISOString().slice(0, 10);
+        const hora = ahora.toTimeString().slice(0, 5);
+        document.getElementById('fecha').value = fecha;
+        document.getElementById('hora').value = hora;
+    }
 
-        <form action="#" method="post" class="formulario">
-            <!-- Fecha y Hora automáticas -->
-            <label for="fecha">Fecha:</label>
-            <input type="text" id="fecha" name="fecha" readonly>
+    window.onload = actualizarFechaHora;
+</script>
 
-            <label for="hora">Hora:</label>
-            <input type="text" id="hora" name="hora" readonly>
+<div class="contenedor">
+    <header>
+        <h1>Nueva Solicitud de Soporte Técnico</h1>
+        <h2>Consejo de la Magistratura - Unidad de Informática</h2>
+    </header>
 
-            <!-- Datos del solicitante (por ahora simulados) -->
-            <label for="nombre">Nombre del Solicitante:</label>
-            <input type="text" id="nombre" name="nombre" value="María Pérez" readonly>
+    <form action="#" method="post" class="formulario">
+        {% csrf_token %}
+        <!-- Fecha y Hora automáticas -->
+        <label for="fecha">Fecha:</label>
+        <input type="text" id="fecha" name="fecha" readonly>
 
-            <label for="cargo">Cargo:</label>
-            <input type="text" id="cargo" name="cargo" value="Secretaria Judicial" readonly>
+        <label for="hora">Hora:</label>
+        <input type="text" id="hora" name="hora" readonly>
 
-            <label for="ubicacion">Ubicación:</label>
-            <input type="text" id="ubicacion" name="ubicacion" value="Juzgado Público Civil 1º - Trinidad" readonly>
+        <!-- Datos del solicitante -->
+        <label for="nombre">Nombre del Solicitante:</label>
+        <input type="text" id="nombre" name="nombre" value="María Pérez" readonly>
 
-            <!-- Descripción del problema -->
-            <label for="descripcion">Descripción del Problema:</label>
-            <textarea id="descripcion" name="descripcion" rows="5" placeholder="Describa detalladamente el problema técnico..." required></textarea>
+        <label for="cargo">Cargo:</label>
+        <input type="text" id="cargo" name="cargo" value="Secretaria Judicial" readonly>
 
-            <!-- Botones -->
-            <div class="botones-formulario">
-                <button type="submit">Enviar Solicitud</button>
-                <a href="/funcionario/" class="btn-cancelar">Cancelar</a>
-            </div>
-        </form>
+        <label for="ubicacion">Ubicación:</label>
+        <input type="text" id="ubicacion" name="ubicacion" value="Juzgado Público Civil 1º - Trinidad" readonly>
 
-        <div class="pie">
-            <p>© 2025 Consejo de la Magistratura - Todos los derechos reservados</p>
+        <!-- Descripción del problema -->
+        <label for="descripcion">Descripción del Problema:</label>
+        <textarea id="descripcion" name="descripcion" rows="5" placeholder="Describa detalladamente el problema técnico..." required></textarea>
+
+        <!-- Botones -->
+        <div class="botones-formulario">
+            <button type="submit">Enviar Solicitud</button>
+            <a href="/funcionario/" class="btn-cancelar">Cancelar</a>
         </div>
-    </div>
+    </form>
 
-</body>
-</html>
+    <div class="pie">
+        <p>© 2025 Consejo de la Magistratura - Todos los derechos reservados</p>
+    </div>
+</div>
+{% endblock %}
