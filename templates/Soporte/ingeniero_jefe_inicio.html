@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Panel Ingeniero Jefe</title>
+    <link rel="stylesheet" href="/static/css/estilo.css">
+    
+    <script>
+        function abrirAsignar(id) {
+            document.getElementById("modal").style.display = "flex";
+            document.getElementById("solicitud-id").innerText = id;
+        }
+
+        function cerrarModal() {
+            document.getElementById("modal").style.display = "none";
+        }
+    </script>
+</head>
+<body>
+
+<div class="contenedor">
+    <header>
+        <h1>Bienvenido, Ing. Jefe Luis Fernández</h1>
+        <h2>Consejo de la Magistratura - Unidad de Informática</h2>
+    </header>
+
+    <!-- Tabla 1: Solicitudes por Asignar -->
+    <section>
+        <h3>Solicitudes por Asignar</h3>
+        <button onclick="location.reload()">Actualizar</button>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Fecha</th>
+                    <th>Tipo</th>
+                    <th>Descripción</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>20</td>
+                    <td>2025-07-13</td>
+                    <td>Sistema</td>
+                    <td>Error en SIREJ</td>
+                    <td><button onclick="abrirAsignar(20)">Asignar</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <!-- Tabla 2: Solicitudes en Progreso -->
+    <section style="margin-top: 40px;">
+        <h3>Solicitudes en Progreso</h3>
+        <button>Exportar a PDF / Excel</button>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Fecha</th>
+                    <th>Tipo</th>
+                    <th>Prioridad</th>
+                    <th>Ingeniero</th>
+                    <th>Estado</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>22</td>
+                    <td>2025-07-12</td>
+                    <td>Técnico</td>
+                    <td><span class="urgencia-alta">Alta</span></td>
+                    <td>Ing. Ramírez</td>
+                    <td>En progreso</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <!-- Tabla 3: Mis Solicitudes -->
+    <section style="margin-top: 40px;">
+        <h3>Mis Solicitudes</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Fecha</th>
+                    <th>Tipo</th>
+                    <th>Prioridad</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>23</td>
+                    <td>2025-07-10</td>
+                    <td>Sistema</td>
+                    <td><span class="urgencia-media">Media</span></td>
+                    <td>Recibido</td>
+                    <td><button onclick="abrirVerSolicitud(23)">Ver Solicitud</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <footer class="navegacion">
+        <div class="botones-derecha">
+            <a href="/login/">Cerrar Sesión</a>
+        </div>
+    </footer>
+
+    <div class="pie">
+        <p>© 2025 Consejo de la Magistratura - Todos los derechos reservados</p>
+    </div>
+</div>
+
+<!-- Modal de asignación -->
+<div id="modal" class="modal">
+    <div class="modal-contenido">
+        <h3>Asignar Solicitud <span id="solicitud-id"></span></h3>
+
+        <label for="ingeniero">Asignar a:</label>
+        <select id="ingeniero" name="ingeniero">
+            <option value="Dana">Ing. Dana</option>
+            <option value="Enrique">Ing. Enrique</option>
+            <option value="Luis Fernández">Asignarme a mí mismo</option>
+        </select>
+
+        <label for="prioridad">Nivel de Urgencia:</label>
+        <select id="prioridad" name="prioridad">
+            <option value="Alta">Alta</option>
+            <option value="Media">Media</option>
+            <option value="Baja">Baja</option>
+        </select>
+
+        <button onclick="cerrarModal()">Guardar</button>
+        <button onclick="cerrarModal()">Cancelar</button>
+    </div>
+</div>
+
+<div id="modal-ver" class="modal">
+    <div class="modal-contenido">
+        <h3>Solicitud ID <span id="solicitud-id-ver">XX</span></h3>
+
+        <label><input type="checkbox" id="check-recibido"> Marcar como Recibido</label>
+
+        <label for="estado">Cambiar Estado:</label>
+        <select id="estado">
+            <option value="en_progreso">En Progreso</option>
+            <option value="finalizado">Finalizado</option>
+        </select>
+
+        <label for="archivo">Adjuntar Evidencia:</label>
+        <input type="file" id="archivo" multiple>
+
+        <div style="margin-top: 20px;">
+            <button onclick="guardarCambios()">Guardar</button>
+            <button onclick="cerrarVer()">Cancelar</button>
+        </div>
+
+        <div id="boton-comprobante" style="display: none; text-align: center; margin-top: 20px;">
+            <a href="/comprobante/" class="btn-ver" target="_blank">Generar Comprobante</a>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
